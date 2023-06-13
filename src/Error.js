@@ -1,19 +1,25 @@
 const ERROR_CODE = Object.freeze({
     NOT_NUMBER: "NOT_NUMBER",
     WRONG_AMOUNT: "WRONG_AMOUNT",
+    WRONG_COUNT: "WRONG_COUNT",
+    OUT_OF_RANGE: "OUT_OF_RANGE",
+    DUPLICATED: "DUPLICATED",
   });
 
 const ERROR_MESSAGE = Object.freeze({
     NOT_NUMBER: "[ERROR] 숫자만 입력해 주세요.",
     WRONG_AMOUNT: "[ERROR] 천원 단위로 입력해 주세요.",
+    WRONG_COUNT: "[ERROR] 로또 번호는 6개의 숫자여야 합니다.",
+    OUT_OF_RANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+    DUPLICATED: "[ERROR] 로또 번호가 중복되었습니다.",
   });
 
   const createParams = (code, value) =>
   [ERROR_MESSAGE[code], { cause: { code, value } }];     //이게 무엇을 위한 코드인지 이해 x
 
   class CustomError extends Error {
-    constructor(code, value = null) {          //Error 라는 클래스가 없는데 어떻게 extends Error가 나오는거지??
-        super(...createParams(code, value));    //super에 ...을 붙이는것은 무엇?
+    constructor(code, value = null) {          
+        super(...createParams(code, value));    
     }
   }
 
