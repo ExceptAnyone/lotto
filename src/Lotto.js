@@ -29,7 +29,7 @@ class Lotto {
     .map(()=> new Lotto(this.generateNumbers()));
   }
 
-  get numbers(){
+  get numbers(){     //get을 쓴 목적?? get에 대한 정확한 개념이 부족한듯
     return this.#numbers;
   }
 }

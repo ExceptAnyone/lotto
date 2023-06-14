@@ -20,12 +20,22 @@ class App {
     purchase() {
         this.user.readAmount(MESSAGE.AMOUNT, (amount) => {
             this.user.lottoList = Lotto.purchase(amount);
-        }
-    )}
-    printMessage(message) {
-        MissionUtils.Console.print(message);
+            this.printMessage("");
+            this.printPurchaseResult(); 
+    });
+  }
+
+  printPurchaseResult() {
+    this.printMessage(MESSAGE.PURCHASE(this.user.lottoList.length));
+    this.user.lottoList.forEach((lotto)=> {
+    this.printMessage(JSON.stringify(lotto.numbers).replaceAll(",", ", "));
+      });
+   }
+  
+  printMessage(message) {
+    MissionUtils.console.print(message);
     }
-}
+  }
 
 const app = new App();
 app.play();
