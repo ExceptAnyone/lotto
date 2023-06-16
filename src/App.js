@@ -5,7 +5,7 @@ const Lotto = require('/.Lotto');
 
 class App {
     constructor(){
-        this.user = new User();
+        this.user = new User();  // constructor를 설정해주는 이유가 뭐지... 추상화하려고 new User를 한건가
     }
 
     play(){
@@ -20,7 +20,7 @@ class App {
     purchase() {
         this.user.readAmount(MESSAGE.AMOUNT, (amount) => {
             this.user.lottoList = Lotto.purchase(amount);
-            this.printMessage("");
+            this.printMessage("");     //빈 문자열을 인자로 준 이유?
             this.printPurchaseResult(); 
     });
   }
@@ -32,6 +32,13 @@ class App {
       });
    }
   
+   setWinNumber(){
+    this.user.readWinNumbers(MESSAGE.WIN_NUMBERS, (winNumbers) => {
+      Lotto.prototype.winNumbers = winNumbers.split(",").map(Number);
+      this.printMessage("");
+    })
+   }
+
   printMessage(message) {
     MissionUtils.console.print(message);
     }

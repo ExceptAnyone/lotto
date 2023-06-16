@@ -8,6 +8,12 @@ class User {
             callback(amount);
         });
     }
-}
+    readWinNumbers(query, callback) {
+        MissionUtils.Console.readLine(query,(winNumber) => {
+            callback(winNumber);
+        });
+    }
+    }
+
 
 module.exports = User;
