@@ -16,7 +16,7 @@ class Validator {
     }
 
     static lottoNumbers(lottoNumbers){
-        if (lottoNumbers.length !==6){
+        if (lottoNumbers.length !==6){ //여기엔 return과 마지막 줄에 callback 함수가 없음 이유는?
             throw new CustomError(ERROR_CODE.WRONG_COUNT);
         }
 
@@ -48,6 +48,24 @@ class Validator {
             }
 
             callback(winNumbers);
+        }
+    }
+
+    static bonusNumber(callback) {
+        return (bonusNumber) => {
+            if (bonusNumber.trim().length ===0 || isNaN(bonusNumber - 0)) {
+                throw new CustomError(ERROR_CODE.NOT_NUMBER);
+            }
+
+            if (bonusNumber < 1 || bonusNumber > 45) {
+                throw new CustomError(ERROR_CODE.OUT_OF_RANGE);
+            }
+
+            if (bonusNumber.includes(parseInt(bonusNumber))) {
+                throw new CustomError(ERROR_CODE.DUPLICATED);
+            }
+
+            callback(bonusNumber);
         }
     }
 }

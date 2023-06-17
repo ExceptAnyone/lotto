@@ -39,6 +39,12 @@ class App {
     })
    }
 
+   setBonusNumber(){
+    this.user.readBonusNumber(MESSAGE.BONUS_NUMBER, (bonusNumber) => {
+      console.log(bonusNumber);
+    })
+   }
+
   printMessage(message) {
     MissionUtils.console.print(message);
     }
