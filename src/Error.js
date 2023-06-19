@@ -17,7 +17,7 @@ const ERROR_MESSAGE = Object.freeze({
   });
 
   const createParams = (code, value) =>
-  [ERROR_MESSAGE[code], { cause: { code, value } }];     //이게 무엇을 위한 코드인지 이해 x
+  [ERROR_MESSAGE[code], { cause: { code, value } }];   
 
   class CustomError extends Error {
     constructor(code, value = null) {          

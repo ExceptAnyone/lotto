@@ -3,7 +3,7 @@ const { ERROR_CODE, CustomError } = require("./Error");
 class Validator {
     static amount(callback){
         return (amount) => {
-            if (amount.trim().length === 0 || isNaN(amount -0)) { //-0을 해주는 이유?
+            if (amount.trim().length === 0 || isNaN(Number(amount))) { //꼼수: isNan(amount-0)-0을 해주면 문자열이 숫자로 반환
                 throw new CustomError(ERROR_CODE.NOT_NUMBER);
             }
 
@@ -11,12 +11,12 @@ class Validator {
                 throw new CustomError(ERROR_CODE.WRONG_AMOUNT);
             }
 
-            callback(amount); //여기 callback이 의미하는 것?
+            callback(amount); 
         }
     }
 
     static lottoNumbers(lottoNumbers){
-        if (lottoNumbers.length !==6){ //여기엔 return과 마지막 줄에 callback 함수가 없음 이유는?
+        if (lottoNumbers.length !==6){ 
             throw new CustomError(ERROR_CODE.WRONG_COUNT);
         }
 
@@ -24,12 +24,12 @@ class Validator {
             throw new CustomError(ERROR_CODE.OUT_OF_RANGE);
         }
 
-        if (lottoNumbers.length !== new Set(lottoNumbers).size){ //length가 아닌 size를 쓰는 이유 // set으로 중복된 요소 제거
+        if (lottoNumbers.length !== new Set(lottoNumbers).size){ 
             throw new CustomError(ERROR_CODE.DUPLICATED);
         }
     }
 
-    static winNumber(callback) {
+    static winNumbers(callback) {
         return (winNumbers) => {
             if (winNumbers.split(",").length === 1) {
                 throw new CustomError(ERROR_CODE.WRONG_FORMAT);
@@ -39,7 +39,7 @@ class Validator {
                 throw new CustomError(ERROR_CODE.WRONG_COUNT);
             }
 
-            if (new Set(winNumbers.split(",").size !== 6)) {
+            if (new Set(winNumbers.split(",")).size !== 6) {
                 throw new CustomError(ERROR_CODE.DUPLICATED);
             }
 
